@@ -19,9 +19,11 @@ defmodule KeyLearningWeb.Api.LectureControllerTest do
   @invalid_attrs %{description: nil, duration: nil, name: nil, video_url: nil}
 
   def fixture(:lecture) do
-    {:ok, course} = KeyLearning.School.create_course(
-      %{name: "tests with elixir/phoenix", image_path: "any_path"}
-    )
+    {:ok, course} =
+      KeyLearning.School.create_course(%{
+        name: "tests with elixir/phoenix",
+        image_path: "any_path"
+      })
 
     create_attrs = @create_attrs |> Map.put(:course_id, course.id)
     {:ok, lecture} = School.create_lecture(create_attrs)
@@ -43,9 +45,11 @@ defmodule KeyLearningWeb.Api.LectureControllerTest do
     setup :register_and_sign_in_for_jwt
 
     test "renders lecture when data is valid", %{conn: conn} do
-      {:ok, course} = KeyLearning.School.create_course(
-        %{name: "tests with elixir/phoenix", image_path: "any_path"}
-      )
+      {:ok, course} =
+        KeyLearning.School.create_course(%{
+          name: "tests with elixir/phoenix",
+          image_path: "any_path"
+        })
 
       create_attrs = @create_attrs |> Map.put(:course_id, course.id)
       conn = post(conn, Routes.api_lecture_path(conn, :create), lecture: create_attrs)

@@ -11,10 +11,12 @@ defmodule KeyLearningWeb.Api.LectureView do
   end
 
   def render("lecture.json", %{lecture: lecture}) do
-    %{id: lecture.id,
+    %{
+      id: lecture.id,
       name: lecture.name,
       duration: lecture.duration,
       description: lecture.description,
-      video_url: lecture.video_url}
+      video_url: lecture.video_url
+    }
   end
 end

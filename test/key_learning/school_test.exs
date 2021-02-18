@@ -67,12 +67,23 @@ defmodule KeyLearning.SchoolTest do
   describe "lectures" do
     alias KeyLearning.School.Lecture
 
-    @valid_attrs %{description: "some description", duration: 42, name: "some name", video_url: "some video_url"}
-    @update_attrs %{description: "some updated description", duration: 43, name: "some updated name", video_url: "some updated video_url"}
+    @valid_attrs %{
+      description: "some description",
+      duration: 42,
+      name: "some name",
+      video_url: "some video_url"
+    }
+    @update_attrs %{
+      description: "some updated description",
+      duration: 43,
+      name: "some updated name",
+      video_url: "some updated video_url"
+    }
     @invalid_attrs %{description: nil, duration: nil, name: nil, video_url: nil}
 
     def lecture_fixture(attrs \\ %{}) do
       course = course_fixture()
+
       {:ok, lecture} =
         attrs
         |> Enum.into(@valid_attrs)

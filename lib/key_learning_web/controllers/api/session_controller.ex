@@ -13,7 +13,8 @@ defmodule KeyLearningWeb.Api.SessionController do
         conn
         |> render("created.json", user: user, jwt: jwt)
 
-      nil -> status_not_be_authenticated(conn)
+      nil ->
+        status_not_be_authenticated(conn)
     end
   end
 
