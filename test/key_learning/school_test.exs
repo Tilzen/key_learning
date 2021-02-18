@@ -72,9 +72,11 @@ defmodule KeyLearning.SchoolTest do
     @invalid_attrs %{description: nil, duration: nil, name: nil, video_url: nil}
 
     def lecture_fixture(attrs \\ %{}) do
+      course = course_fixture()
       {:ok, lecture} =
         attrs
         |> Enum.into(@valid_attrs)
+        |> Map.put(:course_id, course.id)
         |> School.create_lecture()
 
       lecture
@@ -91,7 +93,9 @@ defmodule KeyLearning.SchoolTest do
     end
 
     test "create_lecture/1 with valid data creates a lecture" do
-      assert {:ok, %Lecture{} = lecture} = School.create_lecture(@valid_attrs)
+      course = course_fixture()
+      valid_attrs = @valid_attrs |> Map.put(:course_id, course.id)
+      assert {:ok, %Lecture{} = lecture} = School.create_lecture(valid_attrs)
       assert lecture.description == "some description"
       assert lecture.duration == 42
       assert lecture.name == "some name"
