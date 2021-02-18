@@ -1,6 +1,6 @@
-defmodule KeyLearningWeb.LectureView do
+defmodule KeyLearningWeb.Api.LectureView do
   use KeyLearningWeb, :view
-  alias KeyLearningWeb.LectureView
+  alias KeyLearningWeb.Api.LectureView
 
   def render("index.json", %{lectures: lectures}) do
     %{data: render_many(lectures, LectureView, "lecture.json")}

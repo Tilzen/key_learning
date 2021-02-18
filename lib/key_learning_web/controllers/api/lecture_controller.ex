@@ -1,4 +1,4 @@
-defmodule KeyLearningWeb.LectureController do
+defmodule KeyLearningWeb.Api.LectureController do
   use KeyLearningWeb, :controller
 
   alias KeyLearning.School
@@ -15,7 +15,7 @@ defmodule KeyLearningWeb.LectureController do
     with {:ok, %Lecture{} = lecture} <- School.create_lecture(lecture_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.lecture_path(conn, :show, lecture))
+      |> put_resp_header("location", Routes.api_lecture_path(conn, :show, lecture))
       |> render("show.json", lecture: lecture)
     end
   end

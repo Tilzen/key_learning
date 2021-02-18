@@ -9,15 +9,17 @@ defmodule KeyLearning.School.Lecture do
     field :duration, :integer
     field :name, :string
     field :video_url, :string
-    field :course_id, :binary_id
+    belongs_to :course, KeyLearning.School.Course
 
     timestamps()
   end
 
   @doc false
   def changeset(lecture, attrs) do
+    fields = [:name, :duration, :description, :video_url, :course_id]
+
     lecture
-    |> cast(attrs, [:name, :duration, :description, :video_url])
-    |> validate_required([:name, :duration, :description, :video_url])
+    |> cast(attrs, fields)
+    |> validate_required(fields)
   end
 end
