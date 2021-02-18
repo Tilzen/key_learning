@@ -55,6 +55,22 @@ defmodule KeyLearningWeb.ConnCase do
   end
 
   @doc """
+  Setup helper that registers and logs in users
+
+      setup :register_and_sign_in_for_jwt
+
+  It stores an updated connection with jwt token and a registered user in
+  the test context.
+  """
+  def register_and_sign_in_for_jwt(%{conn: conn}) do
+    user = KeyLearning.AccountsFixtures.user_fixture()
+    {:ok, jwt, _claims} = KeyLearning.Guardian.encode_and_sign(user, %{})
+    conn = Plug.Conn.put_req_header(conn, "authorization", "bearer " <> jwt)
+
+    %{conn: conn, user: user}
+  end
+
+  @doc """
   Logs the given `user` into the `conn`.
 
   It returns an updated `conn`.
